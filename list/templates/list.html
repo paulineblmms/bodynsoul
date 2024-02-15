@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Data List</title>
+</head>
+
+<body>
+  <h1>Data List</h1>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Description</th>
+        <th>Kilocalories</th>
+        <th>Protein</th>
+        <th>Fat</th>
+        <th>Carbohydrate</th>
+        <!-- Add more table headers for additional columns if needed -->
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in data %}
+      <tr>
+        <td>{{ item.category }}</td>
+        <td>{{ item.description }}</td>
+        <td>{{ item.kilocalories }}</td>
+        <td>{{ item.protein }}</td>
+        <td>{{ item.fat }}</td>
+        <td>{{ item.carbohydrate }}</td>
+        <!-- Add more table cells for additional columns if needed -->
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</body>
+
+</html>
