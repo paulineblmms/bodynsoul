@@ -1,4 +1,17 @@
-# bodynsoul demo
+# Body'N'Soul
+
+## A Software Engineering project
+
+## Brought to you by the Self-Believers
+
+### Team members:
+
+1. Ahmed Laaroussi
+2. Andika Pramudya Wardana
+3. Bramantyo Priyo Utomo
+4. Pauline Blum Moyse
+
+The app will be deployed via Vercel or Heroku.g
 
 ## To test if I could make a django app that can read a csv file and load it into a database
 
