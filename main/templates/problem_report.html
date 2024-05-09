@@ -1,7 +1,9 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 
 {% block content %}
-<h1>Add New Product</h1>
+<h1>See any problems in our site?</h1>
+
+<p>Report it so we can make your experience better!</p>
 
 <form method="POST">
     {% csrf_token %}
@@ -10,7 +12,7 @@
         <tr>
             <td></td>
             <td>
-                <input type="submit" value="Add Report"/>
+                <input type="submit" value="Add Report" />
             </td>
         </tr>
     </table>

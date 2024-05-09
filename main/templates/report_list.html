@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>Landing</title>
+{% endblock meta %}
+
+{% block content %}
+
+<table border="1">
+  <tr>
+    <th>Username</th>
+    <th>Description</th>
+    <th>Date Added</th>
+  </tr>
+
+  {% for report in reports %}
+  <tr>
+    <td>{{report.username}}</td>
+    <td>{{report.description}}</td>
+    <td>{{report.date_time}}</td>
+  </tr>
+  {% endfor %}
+  </>
+
+  {% endblock content %}
