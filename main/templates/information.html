@@ -28,6 +28,7 @@
         <th>Protein</th>
         <th>Fat</th>
         <th>Carbohydrate</th>
+        <th>Add</th>
       </tr>
     </thead>
     <tbody>
@@ -39,6 +40,13 @@
         <td>{{ item.protein }}</td>
         <td>{{ item.fat }}</td>
         <td>{{ item.carbohydrate }}</td>
+        <td>
+          <form method="post" action="{% url 'main:add_to_tracking' %}">
+            {% csrf_token %}
+            <input type="hidden" name="item_id" value="{{ item.id }}">
+            <button type="submit">Add to Tracking</button>
+          </form>
+        </td>
       </tr>
       {% endfor %}
     </tbody>
