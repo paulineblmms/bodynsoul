@@ -6,6 +6,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from main.models import Data
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+from main.forms import ProblemReport
 
 @csrf_exempt
 def register(request):
@@ -45,3 +48,13 @@ def data_list(request):
 
 def home(request):
     return render(request, 'landing.html')
+
+def problem_report(request):
+    form = ProblemReport(request.POST or None)
+
+    if form.is_valid() and request.method == "POST":
+        form.save()
+        return HttpResponseRedirect(reverse('main:data_list'))
+
+    context = {'form': form}
+    return render(request, "problem_report.html", context)
