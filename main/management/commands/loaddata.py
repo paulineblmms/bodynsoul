@@ -1,6 +1,6 @@
 import csv
 from django.core.management.base import BaseCommand
-from list.models import Data
+from main.models import Data
 
 class Command(BaseCommand):
     help = 'Load data from CSV file'

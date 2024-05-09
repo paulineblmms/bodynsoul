@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from list.models import Data
+from main.models import Data
 
 class Command(BaseCommand):
     help = 'Delete all data from the Food model'
