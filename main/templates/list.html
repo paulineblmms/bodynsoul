@@ -8,6 +8,11 @@
 
 <body>
   <h1>Data List</h1>
+  <a href="{% url 'main:logout' %}">
+    <button>
+      Logout
+    </button>
+  </a>
   <table border="1">
     <thead>
       <tr>
@@ -32,11 +37,7 @@
       {% endfor %}
     </tbody>
   </table>
-  <a href="{% url 'main:logout' %}">
-    <button>
-      Logout
-    </button>
-  </a>
+
 </body>
 
 </html>

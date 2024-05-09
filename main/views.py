@@ -37,7 +37,7 @@ def login_user(request):
 @csrf_exempt
 def logout_user(request):
     logout(request)
-    return redirect('main:login')
+    return redirect('main:home')
 
 def data_list(request):
     data = Data.objects.all()
