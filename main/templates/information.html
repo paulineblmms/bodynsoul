@@ -3,29 +3,22 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Data List</title>
+  <title>Nutritional Information</title>
 </head>
 
 <body>
-  <h1>Nutritional List</h1>
-  <h1>Welcome to Body'N'Soul!</h1>
-
-  <div>Don't have an account yet?
-    <a href="{% url 'main:register' %}">Register Now</a>
-  </div>
-  <div>Are you already a member?
-    <a href="{% url 'main:login' %}">Login Now</a>
-  </div>
+  <h1>Nutritional Information</h1>
+  <h1>Welcome Back to Body'N'Soul!</h1>
   <a href="{% url 'main:problem_report' %}">
     <button>
       Problem Report
     </button>
   </a>
-  <!-- <a href="{% url 'main:logout' %}">
+  <a href="{% url 'main:logout' %}">
     <button>
       Logout
     </button>
-  </a> -->
+  </a>
   <table border="1">
     <thead>
       <tr>

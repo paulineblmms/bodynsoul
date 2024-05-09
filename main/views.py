@@ -9,6 +9,7 @@ from main.models import Data
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from main.forms import ProblemReport
+from main.models import Report
 
 @csrf_exempt
 def register(request):
@@ -31,7 +32,7 @@ def login_user(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('main:data_list')
+            return redirect('main:data_information')
         else:
             messages.info(request, 'Sorry, incorrect username or password. Please try again.')
     context = {}
@@ -40,14 +41,16 @@ def login_user(request):
 @csrf_exempt
 def logout_user(request):
     logout(request)
-    return redirect('main:home')
+    return redirect('main:data_list')
 
 def data_list(request):
     data = Data.objects.all()
     return render(request, 'list.html', {'data': data})
 
-def home(request):
-    return render(request, 'landing.html')
+@login_required(login_url="/login")
+def data_information(request):
+    data = Data.objects.all()
+    return render(request, 'information.html', {'data': data})
 
 def problem_report(request):
     form = ProblemReport(request.POST or None)
@@ -58,3 +61,12 @@ def problem_report(request):
 
     context = {'form': form}
     return render(request, "problem_report.html", context)
+
+def report_list(request):
+    reports = Report.objects.all()
+
+    context = {
+        'reports': reports
+    }
+
+    return render(request, "report_list.html", context)
