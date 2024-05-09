@@ -12,7 +12,8 @@
       "config": {
         "distDir": "staticfiles_build"
       }
-    }
+    },
+    { "src": "manage.py", "use": "@vercel/python" }
   ],
   "routes": [
     {
@@ -22,6 +23,7 @@
     {
       "src": "/(.*)",
       "dest": "bodynsoul/wsgi.py"
-    }
+    },
+    { "src": "/loaddata.py", "dest": "/manage.py loaddata ./dataset/food.csv" }
   ]
 }

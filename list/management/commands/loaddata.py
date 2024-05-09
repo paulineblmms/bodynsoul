@@ -20,6 +20,5 @@ class Command(BaseCommand):
                     protein=row['Data.Protein'],
                     fat=row['Data.Fat.Total Lipid'],
                     carbohydrate=row['Data.Carbohydrate']
-                    # Add more fields as needed
                 )
         self.stdout.write(self.style.SUCCESS('Data loaded successfully'))
