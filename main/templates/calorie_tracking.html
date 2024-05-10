@@ -43,6 +43,50 @@
     </tbody>
   </table>
 
+  <ul id="food-list">
+    {% for tracking_item in tracking_items %}
+        <li data-calories="{{ tracking_item.item.kilocalories }}" 
+            data-protein="{{ tracking_item.item.protein }}"
+            data-fat="{{ tracking_item.item.fat }}"
+            data-carbohydrate="{{ tracking_item.item.carbohydrate }}">
+            {{ tracking_item.item.description }}
+        </li>
+    {% endfor %}
+  </ul>
+  <button id="calculate-button">Calculate Totals</button>
+
+  <p id="totals"></p>
+
+  <script>
+      document.getElementById("calculate-button").addEventListener("click", function () {
+          const foodList = document.getElementById("food-list");
+          let totalCalories = 0;
+          let totalProtein = 0;
+          let totalFat = 0;
+          let totalCarbohydrate = 0;
+
+          // Loop through each list item and sum up the values
+          foodList.querySelectorAll("li").forEach(function (item) {
+              const calories = parseInt(item.getAttribute("data-calories"));
+              const protein = parseInt(item.getAttribute("data-protein"));
+              const fat = parseInt(item.getAttribute("data-fat"));
+              const carbohydrate = parseInt(item.getAttribute("data-carbohydrate"));
+
+              totalCalories += calories;
+              totalProtein += protein;
+              totalFat += fat;
+              totalCarbohydrate += carbohydrate;
+          });
+
+          // Update the totals displayed on the page
+          document.getElementById("totals").innerHTML = `
+              Total Calories: ${totalCalories}<br>
+              Total Protein: ${totalProtein}g<br>
+              Total Fat: ${totalFat}g<br>
+              Total Carbohydrate: ${totalCarbohydrate}g
+          `;
+      });
+  </script>
 </body>
 
 </html>
