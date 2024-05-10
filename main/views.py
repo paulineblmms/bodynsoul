@@ -103,3 +103,7 @@ def add_to_tracking(request):
         return redirect('main:calorie_tracking')
     else:
         return HttpResponseNotAllowed(['POST'])
+
+def stats(request):
+    #if request.method == 'POST':
+    return render(request, 'stats.html')
