@@ -16,7 +16,7 @@ def calorie_tracking(request):
             
             CalorieTracking.objects.create(user=request.user, item=item)
             
-            return redirect('main:data_information')
+            return redirect('list_information:data_information')
     else:
         form = CalorieTrackingForm()
     
@@ -27,7 +27,7 @@ def add_to_tracking(request):
         item_id = request.POST.get('item_id')
         item = get_object_or_404(Data, pk=item_id)
         CalorieTracking.objects.create(user=request.user, item=item)
-        return redirect('main:calorie_tracking')
+        return redirect('calorie_tracking:calorie_tracking')
     else:
         return HttpResponseNotAllowed(['POST'])
 

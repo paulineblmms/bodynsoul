@@ -9,3 +9,8 @@ class ProblemReport(ModelForm):
 
 class CalorieTrackingForm(forms.Form):
     item = forms.ModelChoiceField(queryset=Data.objects.all(), empty_label=None)
+
+class DataForm(forms.ModelForm):
+    class Meta:
+        model = Data
+        fields = ['category', 'description', 'kilocalories', 'protein', 'fat', 'carbohydrate']
