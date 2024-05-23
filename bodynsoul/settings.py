@@ -38,6 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
+    'authentication',
+    'calorie_tracking',
+    'list_information',
+    'problem_report',
 ]
 
 MIDDLEWARE = [
