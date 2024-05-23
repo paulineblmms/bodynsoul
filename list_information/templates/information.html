@@ -9,19 +9,24 @@
 <body>
   <h1>Nutritional Information</h1>
   <h1>Welcome Back to Body'N'Soul!</h1>
-  <a href="{% url 'main:problem_report' %}">
+  <a href="{% url 'problem_report:problem_report' %}">
     <button>
       Problem Report
     </button>
   </a>
-  <a href="{% url 'main:logout' %}">
+  <a href="{% url 'authentication:logout' %}">
     <button>
       Logout
     </button>
   </a>
-  <a href="{% url 'main:stats' %}">
+  <a href="{% url 'calorie_tracking:stats' %}">
     <button>
       Stats
+    </button>
+  </a>
+  <a href="{% url 'calorie_tracking:calorie_tracking' %}">
+    <button>
+      Calorie Tracking
     </button>
   </a>
   <table border="1">
@@ -46,7 +51,7 @@
         <td>{{ item.fat }}</td>
         <td>{{ item.carbohydrate }}</td>
         <td>
-          <form method="post" action="{% url 'main:add_to_tracking' %}">
+          <form method="post" action="{% url 'calorie_tracking:add_to_tracking' %}">
             {% csrf_token %}
             <input type="hidden" name="item_id" value="{{ item.id }}">
             <button type="submit">Add to Tracking</button>
