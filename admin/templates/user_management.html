@@ -10,37 +10,21 @@
 
 <body>
   <div class="container mt-5">
-    <h1>Content Management</h1>
-    <a href="{% url 'main:report_list' %}" class="btn btn-primary">
-      Manage Reports
-    </a>
-    <a href="{% url 'admin:user_management' %}" class="btn btn-primary">
-      Manage Users
-    </a>
+    <h1>User Management</h1>
     <a href="{% url 'authentication:logout' %}" class="btn btn-danger">
       Logout
     </a>
-    <table id="nutritionalTable" class="table table-striped table-bordered">
+    <table id="userTable" class="table table-striped table-bordered">
       <thead>
         <tr>
-          <th>Category</th>
-          <th>Description</th>
-          <th>Kilocalories</th>
-          <th>Protein</th>
-          <th>Fat</th>
-          <th>Carbohydrate</th>
+          <th>User</th>
           <th>Edit</th>
         </tr>
       </thead>
       <tbody>
-        {% for item in data %}
+        {% for user in users %}
         <tr>
-          <td>{{ item.category }}</td>
-          <td>{{ item.description }}</td>
-          <td>{{ item.kilocalories }}</td>
-          <td>{{ item.protein }}</td>
-          <td>{{ item.fat }}</td>
-          <td>{{ item.carbohydrate }}</td>
+          <td>{{ user.username }}</td>
           <td>
             <!-- TODO: Edit button -->
             <!-- <form method="post" action="{% url 'calorie_tracking:add_to_tracking' %}">
@@ -62,7 +46,7 @@
 
   <script>
     $(document).ready(function() {
-      $('#nutritionalTable').DataTable({
+      $('#userTable').DataTable({
         "paging": true,
         "searching": true,
         "info": true
