@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    path("admin/", include("admin.urls", namespace="admin")),
     path("", include("main.urls")),
     path("", include("authentication.urls", namespace="authentication")),
     path("", include("calorie_tracking.urls", namespace="calorie_tracking")),
