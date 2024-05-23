@@ -39,6 +39,7 @@ media
 # File-based project format
 *.iws
 
+node_modules
 # IntelliJ
 out/
 
