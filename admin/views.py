@@ -12,7 +12,7 @@ def content_management(request):
     return render(request, 'content_management.html', context)
 
 def user_management(request):
-    users = User.objects.all()
+    users = User.objects.all().exclude(is_superuser=True)
     context = {'users':users}
     return render(request, 'user_management.html', context)
 
