@@ -27,6 +27,8 @@ def login_user(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
+            if user.is_superuser:
+                return redirect('admin:admin_landing')
             return redirect('list_information:data_information')
         else:
             messages.info(request, 'Sorry, incorrect username or password. Please try again.')
