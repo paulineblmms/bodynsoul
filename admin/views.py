@@ -28,3 +28,16 @@ def edit_data(request, pk):
         form = DataForm(instance=data)
 
     return render(request, 'edit_data.html', {'form': form})
+
+
+def suspend_user(request, user_id):
+    user = get_object_or_404(User, id=user_id)
+    user.userprofile.is_suspended = True
+    user.userprofile.save()
+    return HttpResponse("User suspended successfully")
+
+def unsuspend_user(request, user_id):
+    user = get_object_or_404(User, id=user_id)
+    user.userprofile.is_suspended = False
+    user.userprofile.save()
+    return HttpResponse("User unsuspended successfully")
