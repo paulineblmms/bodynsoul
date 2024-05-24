@@ -31,3 +31,9 @@ class Stats(models.Model):
     height = models.FloatField()
     age = models.IntegerField()
     activity_level = models.CharField(max_length=100, default='moderately_active')
+
+class Mood(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    date_time = models.DateField(auto_now_add=True)
+    mood = models.CharField(max_length=100)
+    description = models.TextField()

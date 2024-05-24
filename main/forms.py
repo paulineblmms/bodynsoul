@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 from django import forms
-from main.models import Report, Data
+from main.models import Report, Data, Mood
 
 class ProblemReport(ModelForm):
     class Meta:
@@ -31,3 +31,20 @@ class StatsForm(forms.Form):
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
         super().__init__(*args, **kwargs)
+
+class MoodForm(forms.ModelForm):
+    class Meta:
+        model = Mood
+        fields = ['mood', 'description']
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        super().__init__(*args, **kwargs)
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        if self.user:
+            instance.user = self.user
+        if commit:
+            instance.save()
+        return instance

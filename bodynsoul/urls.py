@@ -1,4 +1,3 @@
-from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
@@ -7,5 +6,6 @@ urlpatterns = [
     path("", include("authentication.urls", namespace="authentication")),
     path("", include("calorie_tracking.urls", namespace="calorie_tracking")),
     path("", include("list_information.urls", namespace="list_information")),
-    path("", include("problem_report.urls", namespace="problem_report"))
+    path("", include("problem_report.urls", namespace="problem_report")),
+    path("", include("mood_tracking.urls", namespace="mood_tracking")),
 ]
