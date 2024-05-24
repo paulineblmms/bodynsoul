@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'calorie_tracking',
     'list_information',
     'problem_report',
-    'admin'
+    'admin',
+    'mood_tracking',
 ]
 
 MIDDLEWARE = [
