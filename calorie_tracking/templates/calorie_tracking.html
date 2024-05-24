@@ -22,6 +22,24 @@
         Logout
       </a>
     </div>
+
+    {% if user_stats %}
+      <div class="card mb-3">
+        <div class="card-header">
+          Your Stats
+        </div>
+        <div class="card-body">
+          <p>Weight: {{ user_stats.weight }} kg</p>
+          <p>Height: {{ user_stats.height }} cm</p>
+          <p>Age: {{ user_stats.age }} years</p>
+        </div>
+      </div>
+    {% else %}
+      <div class="alert alert-warning" role="alert">
+        You have not provided your stats yet.
+      </div>
+    {% endif %}
+
     <table class="table table-striped">
       <thead>
         <tr>

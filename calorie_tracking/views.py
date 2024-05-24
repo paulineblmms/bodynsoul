@@ -8,6 +8,11 @@ from main.models import CalorieTracking
 def calorie_tracking(request):
     tracking_items = CalorieTracking.objects.filter(user=request.user)
     
+    try:
+        user_stats = Stats.objects.get(user=request.user)
+    except Stats.DoesNotExist:
+        user_stats = None
+
     if request.method == 'POST':
         form = CalorieTrackingForm(request.POST)
         if form.is_valid():
@@ -20,7 +25,7 @@ def calorie_tracking(request):
     else:
         form = CalorieTrackingForm()
     
-    return render(request, 'calorie_tracking.html', {'form': form, 'tracking_items': tracking_items})
+    return render(request, 'calorie_tracking.html', {'form': form, 'tracking_items': tracking_items, 'user_stats': user_stats})
 
 def add_to_tracking(request):
     if request.method == 'POST':
