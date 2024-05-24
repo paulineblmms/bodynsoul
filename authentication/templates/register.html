@@ -36,32 +36,41 @@
           <h1>Register</h1>
         </div>
         <div class="card-body">
-          <form method="POST">
+          <form method="POST" novalidate>
             {% csrf_token %}
             <div class="mb-3">
               <label for="username" class="form-label">Username</label>
-              <input type="text" id="username" name="username" placeholder="What's your Username?" class="form-control">
+              <input type="text" id="username" name="username" placeholder="What's your Username?" class="form-control" required>
+              {% if form.username.errors %}
+                <div class="alert alert-danger">{{ form.username.errors }}</div>
+              {% endif %}
             </div>
             <div class="mb-3">
               <label for="password" class="form-label">Password</label>
               <div class="input-group">
-                <input type="password" id="password" name="password" placeholder="What's your Password?" class="form-control">
+                <input type="password" id="password" name="password1" placeholder="What's your Password?" class="form-control" required>
                 <span class="input-group-text" id="togglePassword">
                   Show
                 </span>
               </div>
+              {% if form.password1.errors %}
+                <div class="alert alert-danger">{{ form.password1.errors }}</div>
+              {% endif %}
             </div>
             <div class="mb-3">
               <label for="confirm_password" class="form-label">Confirm Password</label>
               <div class="input-group">
-                <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm your Password" class="form-control">
+                <input type="password" id="confirm_password" name="password2" placeholder="Confirm your Password" class="form-control" required>
                 <span class="input-group-text" id="toggleConfirmPassword">
                   Show
                 </span>
               </div>
+              {% if form.password2.errors %}
+                <div class="alert alert-danger">{{ form.password2.errors }}</div>
+              {% endif %}
             </div>
             <div class="d-grid">
-              <input type="submit" name="submit" value="Daftar" class="btn btn-primary btn-hover-zoom">
+              <input type="submit" name="submit" value="Register" class="btn btn-primary btn-hover-zoom">
             </div>
           </form>
 

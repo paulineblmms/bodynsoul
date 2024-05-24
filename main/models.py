@@ -24,3 +24,10 @@ class CalorieTracking(models.Model):
 
     def __str__(self):
         return f"{self.user.username}'s tracking - {self.item.description}"
+    
+class Stats(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    weight = models.FloatField()
+    height = models.FloatField()
+    age = models.IntegerField()
+    activity_level = models.CharField(max_length=100, default='moderately_active')
