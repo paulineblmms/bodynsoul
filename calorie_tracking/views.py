@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, get_object_or_404
 from django.shortcuts import render
 from main.models import Data, Stats
-from django.http import HttpResponseNotAllowed
+from django.http import HttpResponseNotAllowed, JsonResponse
 from main.forms import CalorieTrackingForm, StatsForm
 from main.models import CalorieTracking
 
@@ -31,14 +31,16 @@ def calorie_tracking(request):
     
     return render(request, 'calorie_tracking.html', {'form': form, 'tracking_items': tracking_items, 'user_stats': user_stats, 'recommended_calories': recommended_calories})
 
+
 def add_to_tracking(request):
     if request.method == 'POST':
         item_id = request.POST.get('item_id')
         item = get_object_or_404(Data, pk=item_id)
         CalorieTracking.objects.create(user=request.user, item=item)
-        return redirect('calorie_tracking:calorie_tracking')
+        return JsonResponse({'status': 'success'})
     else:
         return HttpResponseNotAllowed(['POST'])
+
 
 def stats(request):
     if request.method == 'POST':
@@ -51,7 +53,7 @@ def stats(request):
                 age=form.cleaned_data['age'],
                 activity_level=form.cleaned_data['activity_level']
             )
-            return redirect('calorie_tracking:calorie_tracking')  # Redirect to some view after successfully saving the data
+            return redirect('calorie_tracking:calorie_tracking')
     else:
         form = StatsForm(user=request.user)
     return render(request, 'stats.html', {'form': form})

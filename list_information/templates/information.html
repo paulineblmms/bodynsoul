@@ -14,18 +14,10 @@
   <div class="container mt-5">
     <h1>Nutritional Information</h1>
     <h1>Welcome Back to Body'N'Soul!</h1>
-    <a href="{% url 'problem_report:problem_report' %}" class="btn btn-primary">
-      Problem Report
-    </a>
-    <a href="{% url 'authentication:logout' %}" class="btn btn-danger">
-      Logout
-    </a>
-    <a href="{% url 'calorie_tracking:stats' %}" class="btn btn-secondary">
-      Stats
-    </a>
-    <a href="{% url 'calorie_tracking:calorie_tracking' %}" class="btn btn-secondary">
-      Calorie Tracking
-    </a>
+    <a href="{% url 'problem_report:problem_report' %}" class="btn btn-primary">Problem Report</a>
+    <a href="{% url 'authentication:logout' %}" class="btn btn-danger">Logout</a>
+    <a href="{% url 'calorie_tracking:stats' %}" class="btn btn-secondary">Stats</a>
+    <a href="{% url 'calorie_tracking:calorie_tracking' %}" class="btn btn-secondary">Calorie Tracking</a>
     <table id="nutritionalTable" class="table table-striped table-bordered">
       <thead>
         <tr>
@@ -48,10 +40,10 @@
           <td>{{ item.fat }}</td>
           <td>{{ item.carbohydrate }}</td>
           <td>
-            <form method="post" action="{% url 'calorie_tracking:add_to_tracking' %}">
+            <form class="tracking-form" method="post" action="{% url 'calorie_tracking:add_to_tracking' %}">
               {% csrf_token %}
               <input type="hidden" name="item_id" value="{{ item.id }}">
-              <button type="submit" class="btn btn-success">Add</button>
+              <button type="button" class="btn btn-success add-to-tracking">Add</button>
             </form>
           </td>
         </tr>
@@ -60,10 +52,27 @@
     </table>
   </div>
 
-  <!-- Bootstrap JS and jQuery -->
+  <!-- Bootstrap Modal -->
+  <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="confirmationModalLabel">Item Added!</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Do you want to be redirected to the Calorie Tracking page?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+          <button type="button" class="btn btn-primary" id="confirmRedirect">Yes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  <!-- DataTables JS -->
   <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
 
@@ -73,6 +82,25 @@
         "paging": true,
         "searching": true,
         "info": true
+      });
+
+      let formToSubmit;
+      $('.add-to-tracking').on('click', function() {
+        formToSubmit = $(this).closest('.tracking-form');
+        $.ajax({
+          type: formToSubmit.attr('method'),
+          url: formToSubmit.attr('action'),
+          data: formToSubmit.serialize(),
+          success: function(response) {
+            if (response.status === 'success') {
+              $('#confirmationModal').modal('show');
+            }
+          }
+        });
+      });
+
+      $('#confirmRedirect').on('click', function() {
+        window.location.href = "{% url 'calorie_tracking:calorie_tracking' %}";
       });
     });
   </script>
