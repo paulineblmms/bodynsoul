@@ -14,3 +14,13 @@ class DataForm(forms.ModelForm):
     class Meta:
         model = Data
         fields = ['category', 'description', 'kilocalories', 'protein', 'fat', 'carbohydrate']
+
+class StatsForm(forms.Form):
+    weight = forms.FloatField()
+    height = forms.FloatField()
+    age = forms.IntegerField()
+    fields = ['weight', 'height', 'age']
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        super().__init__(*args, **kwargs)

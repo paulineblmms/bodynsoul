@@ -12,6 +12,9 @@
   <div class="container mt-5">
     <h1>Food is not your enemy!</h1>
     <div class="d-flex justify-content-between mb-3">
+      <a href="{% url 'list_information:data_information' %}" class="btn btn-primary">
+        Back
+      </a>
       <a href="{% url 'problem_report:problem_report' %}" class="btn btn-primary">
         Problem Report
       </a>
@@ -28,6 +31,7 @@
           <th>Protein</th>
           <th>Fat</th>
           <th>Carbohydrate</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -39,6 +43,9 @@
           <td>{{ tracking_item.item.protein }}</td>
           <td>{{ tracking_item.item.fat }}</td>
           <td>{{ tracking_item.item.carbohydrate }}</td>
+          <td>
+            <a href="{% url 'calorie_tracking:delete_item' tracking_item.id %}" class="btn btn-danger">Delete</a>
+          </td>
         </tr>
         {% endfor %}
       </tbody>

@@ -22,7 +22,13 @@
       </button>
     </a>
 
-    <div class="mb-3">
+    <form method="POST">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <!-- <div class="mb-3">
       <label for="weight" class="form-label">Weight (kg):</label>
       <input type="number" id="weight" name="weight" class="form-control">
     </div>
@@ -38,12 +44,12 @@
     <button id="calculate-button" class="btn btn-primary">Calculate Recommended Calories</button>
 
     <p id="recommended-calories"></p>
-  </div>
+  </div> -->
 
   <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> -->
 
-  <script>
+  <!-- <script>
     document.getElementById("calculate-button").addEventListener("click", function () {
       const weight = parseFloat(document.getElementById("weight").value);
       const age = parseInt(document.getElementById("age").value);
@@ -57,7 +63,7 @@
       const recommendedCalories = Math.round(10 * weight + 6.25 * height - 5 * age + 5);
       document.getElementById("recommended-calories").textContent = `Recommended Calories per Day: ${recommendedCalories}`;
     });
-  </script>
+  </script> -->
 
 </body>
 
