@@ -19,7 +19,14 @@ class StatsForm(forms.Form):
     weight = forms.FloatField()
     height = forms.FloatField()
     age = forms.IntegerField()
-    fields = ['weight', 'height', 'age']
+    activity_level = forms.ChoiceField(choices=[
+        ('sedentary', 'Sedentary'),
+        ('lightly_active', 'Lightly Active'),
+        ('moderately_active', 'Moderately Active'),
+        ('very_active', 'Very Active'),
+        ('extra_active', 'Extra Active'),
+    ])
+    fields = ['weight', 'height', 'age', 'activity_level']
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)

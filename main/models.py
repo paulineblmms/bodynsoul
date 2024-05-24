@@ -30,3 +30,4 @@ class Stats(models.Model):
     weight = models.FloatField()
     height = models.FloatField()
     age = models.IntegerField()
+    activity_level = models.CharField(max_length=100, default='moderately_active')

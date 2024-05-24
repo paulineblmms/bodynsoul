@@ -4,7 +4,6 @@
 <head>
   <meta charset="UTF-8">
   <title>Calorie Tracking</title>
-  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 
@@ -32,6 +31,7 @@
           <p>Weight: {{ user_stats.weight }} kg</p>
           <p>Height: {{ user_stats.height }} cm</p>
           <p>Age: {{ user_stats.age }} years</p>
+          <p>Recommended Daily Calorie Intake: <span id="recommended-calories">{{ recommended_calories }}</span> kcal</p>
         </div>
       </div>
     {% else %}
@@ -57,7 +57,7 @@
         <tr>
           <td>{{ tracking_item.item.category }}</td>
           <td>{{ tracking_item.item.description }}</td>
-          <td>{{ tracking_item.item.kilocalories }}</td>
+          <td class="item-calories">{{ tracking_item.item.kilocalories }}</td>
           <td>{{ tracking_item.item.protein }}</td>
           <td>{{ tracking_item.item.fat }}</td>
           <td>{{ tracking_item.item.carbohydrate }}</td>
@@ -69,19 +69,8 @@
       </tbody>
     </table>
 
-    <ul id="food-list" class="list-group mb-3">
-      {% for tracking_item in tracking_items %}
-      <li class="list-group-item" data-calories="{{ tracking_item.item.kilocalories }}" 
-          data-protein="{{ tracking_item.item.protein }}"
-          data-fat="{{ tracking_item.item.fat }}"
-          data-carbohydrate="{{ tracking_item.item.carbohydrate }}">
-          {{ tracking_item.item.description }}
-      </li>
-      {% endfor %}
-    </ul>
-    <button id="calculate-button" class="btn btn-success">Calculate Totals</button>
+    <div id="total-calories" class="mt-3"></div>
 
-    <p id="totals" class="mt-3"></p>
   </div>
 
   <!-- Bootstrap JS and jQuery -->
@@ -89,35 +78,25 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
   <script>
-    document.getElementById("calculate-button").addEventListener("click", function () {
-        const foodList = document.getElementById("food-list");
-        let totalCalories = 0;
-        let totalProtein = 0;
-        let totalFat = 0;
-        let totalCarbohydrate = 0;
+    document.addEventListener("DOMContentLoaded", function() {
+      const recommendedCalories = parseInt(document.getElementById("recommended-calories").textContent);
+      let totalCalories = 0;
 
-        // Loop through each list item and sum up the values
-        foodList.querySelectorAll("li").forEach(function (item) {
-            const calories = parseInt(item.getAttribute("data-calories"));
-            const protein = parseInt(item.getAttribute("data-protein"));
-            const fat = parseInt(item.getAttribute("data-fat"));
-            const carbohydrate = parseInt(item.getAttribute("data-carbohydrate"));
+      document.querySelectorAll(".item-calories").forEach(function(item) {
+        totalCalories += parseInt(item.textContent);
+      });
 
-            totalCalories += calories;
-            totalProtein += protein;
-            totalFat += fat;
-            totalCarbohydrate += carbohydrate;
-        });
+      const totalCaloriesDiv = document.getElementById("total-calories");
+      totalCaloriesDiv.innerHTML = `Total Calories: ${totalCalories} kcal`;
 
-        // Update the totals displayed on the page
-        document.getElementById("totals").innerHTML = `
-            Total Calories: ${totalCalories}<br>
-            Total Protein: ${totalProtein}g<br>
-            Total Fat: ${totalFat}g<br>
-            Total Carbohydrate: ${totalCarbohydrate}g
-        `;
+      if (totalCalories > recommendedCalories) {
+        totalCaloriesDiv.style.color = "red";
+      } else {
+        totalCaloriesDiv.style.color = "green";
+      }
     });
   </script>
+
 </body>
 
 </html>
