@@ -10,3 +10,8 @@ urlpatterns = [
     path('edit_data/<int:pk>/', edit_data, name='edit_data'),
 
 ]
+
+urlpatterns = [
+    path('suspend_user/<int:user_id>/', views.suspend_user, name='suspend_user'),
+    path('unsuspend_user/<int=user_id>/', views.unsuspend_user, name='unsuspend_user'),
+]
