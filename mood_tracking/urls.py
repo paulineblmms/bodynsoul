@@ -1,8 +1,8 @@
 from django.urls import path
-from mood_tracking.views import mood_tracking
-
-app_name = 'main'
+from . import views
 
 urlpatterns = [
-    path('mood-tracking/', mood_tracking, name='mood_tracking'),
+    path('', views.mood_list, name='mood_list'),
+    path('create/', views.mood_create, name='mood_create'),
+    path('links/<str:mood_name>/', views.mood_links, name='mood_links'),
 ]
